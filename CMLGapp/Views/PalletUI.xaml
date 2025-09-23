@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMLGapp.Views.PalletUI"
+             Title="Pallet"
+             BackgroundColor="#5A646E">
+
+    <ContentPage.Resources>
+        <!-- Ring around each dot -->
+        <Style x:Key="HoleRing" TargetType="Border">
+            <Setter Property="WidthRequest" Value="34"/>
+            <Setter Property="HeightRequest" Value="34"/>
+            <Setter Property="Stroke" Value="#0B3A46"/>
+            <Setter Property="StrokeThickness" Value="3.5"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="9999"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Radius="14" Opacity="0.5" Brush="#08242C" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <!-- Inner teal dot -->
+        <Style x:Key="HoleDot" TargetType="Image">
+            <Setter Property="WidthRequest" Value="22"/>
+            <Setter Property="HeightRequest" Value="22"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <!-- Section container (the dark panel behind each group) -->
+        <Style x:Key="TrayPanel" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#28323C"/>
+            <Setter Property="Stroke" Value="#28323C"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="18"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Radius="20" Opacity="0.35" Brush="#0A0F14" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Outer layout: three equal columns -->
+    <Grid Padding="20" ColumnSpacing="20" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- three equal columns so middle always shows -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <!-- Left -->
+            <ColumnDefinition Width="2*"/>
+            <!-- Middle, slightly larger -->
+            <ColumnDefinition Width="*"/>
+            <!-- Right -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Top bar -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            
+            
+        </Grid>
+
+        <!-- LEFT CONTAINER -->
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource TrayPanel}" HeightRequest="300" WidthRequest="70">
+            <Grid RowSpacing="10" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Style="{StaticResource HoleRing}" Grid.Row="0">
+                    <Image x:Name="Img26" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="1">
+                    <Image x:Name="Img27" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="2">
+                    <Image x:Name="Img28" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="3">
+                    <Image x:Name="Img29" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="4">
+                    <Image x:Name="Img30" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="5">
+                    <Image x:Name="Img31" Style="{StaticResource HoleDot}" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- CENTER CONTAINER -->
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TrayPanel}" HeightRequest="300" WidthRequest="200">
+            <Grid RowSpacing="10" ColumnSpacing="10" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition x:Name="Row6Def" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- row 0 -->
+                <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="0">
+                    <Image x:Name="Img1" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="1">
+                    <Image x:Name="Img7" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="2">
+                    <Image x:Name="Img13" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="3">
+                    <Image x:Name="Img19" Style="{StaticResource HoleDot}" />
+                </Border>
+
+                <!-- row 1 -->
+                <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="0">
+                    <Image x:Name="Img2" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="1">
+                    <Image x:Name="Img8" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="2">
+                    <Image x:Name="Img14" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="3">
+                    <Image x:Name="Img20" Style="{StaticResource HoleDot}" />
+                </Border>
+
+                <!-- row 2 -->
+                <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="0">
+                    <Image x:Name="Img3" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="1">
+                    <Image x:Name="Img9" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="2">
+                    <Image x:Name="Img15" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="3">
+                    <Image x:Name="Img21" Style="{StaticResource HoleDot}" />
+                </Border>
+
+                <!-- row 3 -->
+                <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="0">
+                    <Image x:Name="Img4" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="1">
+                    <Image x:Name="Img10" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="2">
+                    <Image x:Name="Img16" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="3">
+                    <Image x:Name="Img22" Style="{StaticResource HoleDot}" />
+                </Border>
+
+                <!-- row 4 -->
+                <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="0">
+                    <Image x:Name="Img5" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="1">
+                    <Image x:Name="Img11" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="2">
+                    <Image x:Name="Img17" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="3">
+                    <Image x:Name="Img23" Style="{StaticResource HoleDot}" />
+                </Border>
+
+                <!-- row 5  (this will be hidden for HSK100 )-->
+                <Border x:Name="R6C1" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="0">
+                    <Image x:Name="Img6" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border x:Name="R6C2" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="1">
+                    <Image x:Name="Img12" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border x:Name="R6C3" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="2">
+                    <Image x:Name="Img18" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border x:Name="R6C4" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="3">
+                    <Image x:Name="Img24" Style="{StaticResource HoleDot}" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- RIGHT CONTAINER -->
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource TrayPanel}" HeightRequest="300" WidthRequest="70">
+            <Grid RowSpacing="20" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Style="{StaticResource HoleRing}" Grid.Row="0">
+                    <Image x:Name="Img32" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="1">
+                    <Image x:Name="Img33" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="2">
+                    <Image x:Name="Img34" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="3">
+                    <Image x:Name="Img35" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="4">
+                    <Image x:Name="Img36" Style="{StaticResource HoleDot}" />
+                </Border>
+                <Border Style="{StaticResource HoleRing}" Grid.Row="5">
+                    <Image x:Name="Img37" Style="{StaticResource HoleDot}" />
+                </Border>
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

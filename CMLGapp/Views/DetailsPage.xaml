@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMLGapp.Views.DetailsPage" 
+             BackgroundColor="#5A646E"
+Shell.BackgroundColor="#28323C">
+    <!--Title bar top-->
+    <Shell.TitleView>
+        <Grid Padding="0" Margin="0" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="zollerlogo.png" WidthRequest="80" HeightRequest="100" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0"/>
+            <Label Text="CoraMeasure LG" VerticalOptions="Center" FontAttributes="Bold" TextColor="White" FontSize="18" Padding="10" Grid.Column="1"/>
+        </Grid>
+    </Shell.TitleView>
+    <!--content-->
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
+
+            <Frame Padding="10" BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" >
+                <Label Text="Summary" HorizontalOptions="Center" FontSize="24" TextColor="Yellow" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSummaryTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+            <Frame Padding="10" BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" >
+                <Label Text="Alarm" HorizontalOptions="Center" FontSize="24" TextColor="Yellow" FontAttributes="Bold" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAlarmTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+
+            <Frame Padding="10" BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" >
+                <Label Text="Alarm History" HorizontalOptions="Center" FontSize="24" TextColor="Yellow" FontAttributes="Bold" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAlarmHistroyTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+
+            <!--Product Processed-->
+            <Frame Padding="10" BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" >
+                <Label Text=" Measuring Status " HorizontalOptions="Center" FontSize="24" TextColor="Yellow" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProdProcessedTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+
+            <Frame Padding="10" BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" >
+                <Label Text="Charts" HorizontalOptions="Center" FontSize="24"  TextColor="Yellow" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnChartsTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+            <Frame Padding="10" BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" >
+                <Label Text="Default Layout" HorizontalOptions="Center" FontSize="24" TextColor="Yellow" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLayoutTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+
+
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+    
+    
+</ContentPage>

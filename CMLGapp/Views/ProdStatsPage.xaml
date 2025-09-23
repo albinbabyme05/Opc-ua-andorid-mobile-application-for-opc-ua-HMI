@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CMLGapp.Views.ProdStatsPage"
+    Title="Zoller CoraMeasureLG"
+    BackgroundColor="#28323C"
+    Shell.BackgroundColor="#28323C"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Color x:Key="PageBg">#28323C</Color>
+        <Color x:Key="CardBg">#2F3942</Color>
+        <Color x:Key="CardBg2">#313C46</Color>
+        <Color x:Key="BorderDim">#555E68</Color>
+        <Color x:Key="TextPrimary">#E7EEF5</Color>
+        <Color x:Key="TextMuted">#95A4B3</Color>
+        <Color x:Key="AccentCyan">#7DE0FF</Color>
+        <Color x:Key="AccentGreen">#77E07C</Color>
+        <Color x:Key="Divider">#4C5661</Color>
+
+        <!-- container frame -->
+        <Style x:Key="OuterShellFrame" TargetType="Frame">
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="CornerRadius" Value="22"/>
+            <Setter Property="BackgroundColor" Value="#555E68"/>
+            <Setter Property="BorderColor" Value="{StaticResource BorderDim}"/>
+            <Setter Property="HasShadow" Value="True"/>
+        </Style>
+
+        <!-- cards -->
+        <Style x:Key="Card" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="{StaticResource CardBg}" />
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="BorderColor" Value="{StaticResource CardBg}" />
+        </Style>
+
+        <!-- image icons -->
+        <Style TargetType="Image" x:Key="ImageIcon">
+            <Setter Property="HeightRequest" Value="{OnIdiom Phone=28, Tablet=42, Desktop=26}" />
+            <Setter Property="WidthRequest" Value="{OnIdiom Phone=28, Tablet=42, Desktop=26}" />
+            <Setter Property="Opacity" Value="{OnIdiom Phone=0.85, Tablet=0.85, Desktop=0.85}" />
+        </Style>
+
+        <!-- Top bar frame -->
+        <Style x:Key="TopBarFrame" TargetType="Frame">
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="BackgroundColor" Value="#28323C"/>
+            <Setter Property="BorderColor" Value="#28323C"/>
+            <Setter Property="Margin" Value="20,10,20,6"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="CardTitle">
+            <Setter Property="TextColor" Value="{StaticResource TextMuted}" />
+            <Setter Property="FontSize" Value="{OnIdiom Phone=10, Tablet=16, Desktop=26}" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="LabelStyle">
+            <Setter Property="TextColor" Value="{StaticResource TextMuted}" />
+            <Setter Property="FontSize" Value="{OnIdiom Phone=14, Tablet=30, Desktop=26}" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid Padding="0" RowSpacing="5" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- TOP BAR -->
+            <Frame Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource TopBarFrame}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Hamburger -->
+                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="8" BackgroundColor="#28323C" BorderColor="#28323C" HasShadow="False">
+                        <Image x:Name="HamburgerMenu" Source="hamburger_menu.png" WidthRequest="{OnIdiom Phone=15, Tablet=28, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=28, Desktop=26}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnHamburgerTapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!-- Date / Mode -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                        <HorizontalStackLayout>
+                            <Label x:Name="lblPlcTime" Text="Loading..." TextColor="#B9C4CF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}" />
+                            <Label x:Name="lblDateTime" Text=" / Loading..." TextColor="#B9C4CF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}" Margin="6,0,0,0"/>
+                        </HorizontalStackLayout>
+                        <Label x:Name="lblMachineMode" Text="Loading..." FontAttributes="Bold" TextColor="#E6EDF3" FontSize="{OnIdiom Phone=11, Tablet=16, Desktop=26}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Status -->
+                    <Grid Grid.Column="2" ColumnSpacing="10" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Column="0" Padding="10,6" CornerRadius="10" BackgroundColor="#28323C" BorderColor="#28323C" HasShadow="False">
+                            <Grid ColumnSpacing="8" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" x:Name="machineStatusColor" Source="machinestatus.svg" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" x:Name="lblMachineStatus" Text="Loading..."  TextColor="#6CC68C" FontAttributes="Bold" FontSize="{OnIdiom Phone=12, Tablet=18, Desktop=26}"
+                                       LineBreakMode="NoWrap" MaxLines="1" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="#28323C">
+                            <BoxView x:Name="bvStop" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4" BackgroundColor="#28323C" Opacity="1"/>
+                            <BoxView x:Name="bvStart" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4" BackgroundColor="#28323C"  Opacity="1"/>
+                            <BoxView x:Name="bvRun" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4" BackgroundColor="#28323C"  Opacity="1"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Grid>
+            </Frame>
+
+            <!-- Page Title -->
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="Auto,*" ColumnSpacing="16" Padding="26,2,26,2">
+                <Label Text="ANALYTICS"  TextColor="{StaticResource AccentCyan}" FontSize="{OnIdiom Phone=12, Tablet=14, Desktop=26}" FontAttributes="Bold" VerticalOptions="Center"/>
+                <BoxView Grid.Column="1" HeightRequest="1" BackgroundColor="#4C5661" VerticalOptions="Center"/>
+            </Grid>
+
+            <!-- MAIN FRAME -->
+            <Frame Grid.Row="3" Margin="15,0,15,15" Style="{StaticResource OuterShellFrame}">
+                <Grid x:Name="DashGrid" RowSpacing="10" ColumnSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="ColA" Width="*"/>
+                        <ColumnDefinition x:Name="ColB" Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Filter -->
+                    <Frame Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Card}" Padding="10" BackgroundColor="{StaticResource CardBg2}">
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="RANGE:" VerticalTextAlignment="Center" FontSize="{OnIdiom Phone=12, Tablet=14, Desktop=14}" TextColor="{StaticResource TextMuted}" Margin="0,0,8,0"/>
+
+                            <Button x:Name="btnToday" Grid.Column="1" Text="Today" Clicked="OnFilterToday" Padding="11,6" CornerRadius="10" BackgroundColor="#2F3942"
+                                    TextColor="{StaticResource TextPrimary}" FontSize="{OnIdiom Phone=12, Tablet=14, Desktop=14}" />
+                            <Button x:Name="btnWeek" Grid.Column="2" Text="Week" Clicked="OnFilterWeek" Padding="11,6" CornerRadius="10" BackgroundColor="#39434C" 
+                                    TextColor="{StaticResource TextPrimary}" FontSize="{OnIdiom Phone=12, Tablet=14, Desktop=14}" />
+                            <Button x:Name="btnMonth" Grid.Column="3" Text="Month" Clicked="OnFilterMonth" Padding="11,6" CornerRadius="10" BackgroundColor="#2F3942" 
+                                    TextColor="{StaticResource TextPrimary}" FontSize="{OnIdiom Phone=12, Tablet=14, Desktop=14}" IsVisible="{OnIdiom Phone=False, Tablet=True, Desktop=False}" />
+
+                            <!-- Calendar  -->
+                            <DatePicker x:Name="dpDay" Grid.Column="5" IsVisible="{OnIdiom Phone=True, Tablet=False, Desktop=False}" Format="dd.MM.yy" TextColor="{StaticResource TextPrimary}" DateSelected="OnDayPicked"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 1 Row 1: Bar chart Tools vs Date -->
+                    <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource Card}" BackgroundColor="{StaticResource CardBg2}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label x:Name="lblToolsBarTitle" Text="TOOLS MEASURED Graph (WEEK)" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" x:Name="lblToolsBarUnit" Text="[count]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <ContentView x:Name="toolsBarHost" Grid.Row="2" HeightRequest="180" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 1 Row 2: Current cycle count -->
+                    <Frame Grid.Row="2" Grid.Column="0" Style="{StaticResource Card}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label x:Name="lblCurrentCycleTitle" Text="CURRENT CYCLE COUNT" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[amount]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Image Source="zoller_t_measured_today.png" Style="{StaticResource ImageIcon}" />
+                                <Label x:Name="lblToolsPeriodValue" Grid.Column="1" Text="0" TextColor="{StaticResource AccentCyan}" FontAttributes="Bold" Style="{StaticResource LabelStyle}"
+                                       FontFamily="zollerTextFont" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 1 Row 3: Tools measured (range total) -->
+                    <Frame Grid.Row="3" Grid.Column="0" Style="{StaticResource Card}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label x:Name="lblToolsTotalTitle" Text="TOOLS MEASURED (WEEK)" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[amount]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Image Source="zoller_t_mess_totally.png" Style="{StaticResource ImageIcon}" />
+                                <Label x:Name="lblToolsTotalValue" Grid.Column="1" Text="0" TextColor="{StaticResource AccentCyan}" FontAttributes="Bold"
+                                      Style="{StaticResource LabelStyle}" FontFamily="zollerTextFont" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 1 Row 4: Total working hours (machine) -->
+                    <Frame Grid.Row="4" Grid.Column="0" Style="{StaticResource Card}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label Text="TOTAL WORKING HOURS" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[hours]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Image Source="zoller_hr_rate.png" Style="{StaticResource ImageIcon}"/>
+                                <Label x:Name="lblTotalWorkingHours" Grid.Column="1" Text="00:00:00" TextColor="{StaticResource AccentCyan}" FontAttributes="Bold" Style="{StaticResource LabelStyle}"
+                                       FontFamily="zollerTextFont" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 2 Row 1: Money saved graph -->
+                    <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource Card}" BackgroundColor="{StaticResource CardBg2}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label x:Name="lblMoneySavedTitle" Text="MONEY SAVED TOTALLY (GRAPH)" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[USD]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <ContentView x:Name="moneySavedHost"
+                                         Grid.Row="2"
+                                         HeightRequest="180"
+                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="FillAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 2 Row 2: Saved working hours -->
+                    <Frame Grid.Row="2" Grid.Column="1" Style="{StaticResource Card}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label Text="SAVED WORKING HOURS" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[hours]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Image Source="zoller_saved_wrkng_hrs.png" Style="{StaticResource ImageIcon}" />
+                                <Label x:Name="lblHoursSaved" Grid.Column="1" Text="00:00:00" TextColor="{StaticResource AccentCyan}" FontAttributes="Bold" Style="{StaticResource LabelStyle}" 
+                                       FontFamily="zollerTextFont" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 2 Row 3: Money saved today / period -->
+                    <Frame Grid.Row="3" Grid.Column="1" Style="{StaticResource Card}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label x:Name="lblMoneySavedTodayTitle" Text="MONEY SAVED (WEEK)" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[USD]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Image Source="zoller_mony_saved.png" Style="{StaticResource ImageIcon}"/>
+                                <Label x:Name="lblMoneySavedToday" Grid.Column="1" Text="$ 0" TextColor="{StaticResource AccentGreen}" FontAttributes="Bold" Style="{StaticResource LabelStyle}"
+                                       FontFamily="zollerTextFont" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Col 2 Row 4: Money saved totally (lifetime) -->
+                    <Frame Grid.Row="4" Grid.Column="1" Style="{StaticResource Card}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <Label Text="MONEY SAVED TOTALLY" Style="{StaticResource CardTitle}" />
+                                <Label Grid.Column="1" Text="[USD]" Style="{StaticResource CardTitle}" />
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Divider}" />
+                            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Image Source="zoller_mony_saved.png"  Style="{StaticResource ImageIcon}"/>
+                                <Label x:Name="lblMoneySavedTotal" Grid.Column="1" Text="$ 0" TextColor="{StaticResource AccentGreen}" FontAttributes="Bold" Style="{StaticResource LabelStyle}"
+                                       FontFamily="zollerTextFont" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>

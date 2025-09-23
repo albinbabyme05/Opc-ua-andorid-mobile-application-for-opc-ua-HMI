@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="CMLGapp.Views.TopBarView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#28323C"
+    x:Name="Root"  >
+
+    <Grid RowDefinitions="Auto,Auto">
+
+        <!-- TOP BAR -->
+        <Frame Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="#28323C" BorderColor="#28323C">
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Hamburger -->
+                <Frame WidthRequest="40" HeightRequest="40" CornerRadius="8"
+                       BackgroundColor="#28323C" BorderColor="#28323C" HasShadow="False">
+                    <Image x:Name="HamburgerMenu" Source="hamburger_menu.png"
+                            WidthRequest="{OnIdiom Phone=25, Tablet=28, Desktop=26}" HeightRequest="{OnIdiom Phone=25, Tablet=28, Desktop=26}"
+                           VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHamburgerTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Date / Mode -->
+                <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                    <HorizontalStackLayout>
+                        <Label x:Name="lblPlcTime" Text="Loading..." TextColor="#B9C4CF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}"/>
+                        <Label x:Name="lblDateTime" Text=" / Loading..." TextColor="#B9C4CF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}" Margin="6,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <Label x:Name="lblMachineMode" Text="Loading..." FontAttributes="Bold" TextColor="#E6EDF3" FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=26}"/>
+                </VerticalStackLayout>
+
+                <!-- Status -->
+                <Grid Grid.Column="2" ColumnSpacing="10" VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0" Padding="10,6" CornerRadius="10"
+                           BackgroundColor="#28323C" BorderColor="#28323C" HasShadow="False">
+                        <Grid ColumnSpacing="8" VerticalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" x:Name="machineStatusColor" Source="machinestatus.svg"
+                                  WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" x:Name="lblMachineStatus" Text="Loading..." TextColor="#6CC68C"
+                                   FontAttributes="Bold" FontSize="{OnIdiom Phone=14, Tablet=18, Desktop=26}" LineBreakMode="NoWrap" MaxLines="1"
+                                   VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </Frame>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center" HorizontalOptions="End">
+                        <BoxView x:Name="bvStop" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4"  Opacity="1"/>
+                        <BoxView x:Name="bvStart" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4"   Opacity="1"/>
+                        <BoxView x:Name="bvRun" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4"  Opacity="1"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Frame>
+        
+        <!--Page title-->
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="16" Padding="25,-10,10,2">
+            <Label
+                Text="{Binding Source={x:Reference Root}, Path=PageTitle}"  TextColor="#7DE0FF" FontSize="18" VerticalOptions="Center" />
+                <BoxView Grid.Column="1" HeightRequest="1" BackgroundColor="#4C5661" VerticalOptions="Center"/>
+        </Grid>
+
+    </Grid>
+</ContentView>

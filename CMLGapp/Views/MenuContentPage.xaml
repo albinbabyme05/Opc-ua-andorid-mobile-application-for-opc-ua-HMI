@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMLGapp.Views.MenuContentPage"
+             xmlns:local="clr-namespace:CMLGapp.Views"
+             BackgroundColor="#5A646E"
+             Shell.BackgroundColor="#28323C">
+
+    <!-- Title bar -->
+    <Shell.TitleView>
+        <Grid Padding="0" Margin="0" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Source="zollerlogo.png"
+                   WidthRequest="{OnIdiom Phone=60, Tablet=80, Desktop=100}"
+                   HeightRequest="{OnIdiom Phone=70, Tablet=100, Desktop=120}"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
+
+            <Label Text="CoraMeasure LG"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=20}"
+                   Padding="10,0"
+                   Grid.Column="1"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <!-- Content -->
+    <ScrollView>
+        <VerticalStackLayout Padding="{OnIdiom Phone=12, Tablet=20, Desktop=24}"
+                             Spacing="{OnIdiom Phone=12, Tablet=20, Desktop=24}">
+
+           
+            <CollectionView ItemsSource="{Binding currentLayoutCards}"
+                            ItemSizingStrategy="MeasureFirstItem"
+                            HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout x:Name="MenuGridLayout"
+                                     Orientation="Vertical"
+                                     Span="{OnIdiom Phone=2, Tablet=3, Desktop=3}"
+                                     HorizontalItemSpacing="{OnIdiom Phone=10, Tablet=14, Desktop=16}"
+                                     VerticalItemSpacing="{OnIdiom Phone=10, Tablet=14, Desktop=16}"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#28323C"
+                               BorderColor="#28323C"
+                               HasShadow="False"
+                               Padding="{OnIdiom Phone=10, Tablet=12, Desktop=14}"
+                               CornerRadius="18"
+                               HeightRequest="{OnIdiom Phone=140, Tablet=180, Desktop=200}"
+                               HorizontalOptions="FillAndExpand">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.NavigateCommand, Source={RelativeSource AncestorType={x:Type local:MenuContentPage}}}"
+                                                      CommandParameter="{Binding}" />
+                            </Frame.GestureRecognizers>
+
+                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                <Image Grid.Row="0"
+                                       Source="{Binding Image}"
+                                       Aspect="AspectFit"
+                                       HeightRequest="{OnIdiom Phone=30, Tablet=60, Desktop=70}"
+                                       HorizontalOptions="Center"/>
+                                
+                                <BoxView Grid.Row="1"
+                                         HeightRequest="1"
+                                         BackgroundColor="#6C7680"
+                                         Opacity="0.7"
+                                         HorizontalOptions="FillAndExpand"
+                                         Margin="0,10,0,12"/>
+                                <Label Grid.Row="2"
+                                       Text="{Binding CardName}"
+                                       TextColor="#9BA7B3"
+                                       FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=18}"
+                                       Margin="{OnIdiom Phone='50,0,0,0', Tablet='150,0,0,0', Desktop='50,0,0,0'}"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Manage Button -->
+            <Button Text="Manage Layout Features"
+                    BackgroundColor="#28323C"
+                    TextColor="#9BA7B3"
+                    FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=16}"
+                    CornerRadius="14"
+                    HeightRequest="{OnIdiom Phone=46, Tablet=50, Desktop=52}"
+                    WidthRequest="{OnIdiom Phone=260, Tablet=350, Desktop=380}"
+                    HorizontalOptions="Center"
+                    Clicked="OnManageLayoutClicked"/>
+
+            <!--
+            <Button Text="Logout"
+                    Clicked="OnLogoutClicked"
+                    BackgroundColor="#28323C"
+                    TextColor="#F0E600"
+                    FontSize="16"
+                    HeightRequest="50"
+                    WidthRequest="350"/>
+            -->
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:viewmodels="clr-namespace:CMLGapp.ViewModels"
+                       xmlns:models="clr-namespace:CMLGapp.Models"
+                       xmlns:local="clr-namespace:CMLGapp.Views"
+                       x:Class="CMLGapp.Views.ManageLayoutPage"
+                       x:DataType="viewmodels:MainLayoutViewModel"
+                       Title="Manage Layout"
+                       BackgroundColor="#28323C"
+                       Shell.NavBarIsVisible="False"
+                       Shell.BackgroundColor="#28323C">
+
+    <!-- Title bar
+    <Shell.TitleView>
+        <Grid Padding="0" Margin="0" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="zollerlogo.png" WidthRequest="80" HeightRequest="100"
+                   HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0"/>
+            <Label Text="CoraMeasure LG" VerticalOptions="Center" FontAttributes="Bold"
+                   TextColor="White" FontSize="18" Padding="10" Grid.Column="1"/>
+        </Grid>
+    </Shell.TitleView> -->
+    
+    <Frame Margin="10" Padding="5" BackgroundColor="#4C5661" BorderColor="#4C5661" CornerRadius="14" HasShadow="True">
+        <!--app content-->
+        <ScrollView>
+            
+            <VerticalStackLayout Padding="05" Spacing="05">
+
+                <!--Frequently used tab-->
+                <Label Text="Frequently used" FontAttributes="Bold" TextColor="#B9C4CF" />
+
+                <CollectionView ItemsSource="{Binding currentLayoutCards}" ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=2, Tablet=3, Desktop=3}"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:LayoutModel">
+                            <Grid Padding="0" Margin="5">
+                                <!-- Card -->
+                                <Frame BackgroundColor="#28323C" BorderColor="#28323C" CornerRadius="20" Padding="5" HeightRequest="{OnIdiom Phone=120, Tablet=180, Desktop=26}" HorizontalOptions="FillAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.RemoveCommand, Source={RelativeSource AncestorType={x:Type local:ManageLayoutPage}}}"
+                                            CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Image Grid.Row="0"
+                                               Source="{Binding Image}" Aspect="AspectFit" HeightRequest="{OnIdiom Phone=40, Tablet=60, Desktop=26}" WidthRequest="{OnIdiom Phone=40, Tablet=60, Desktop=26}" HorizontalOptions="Center" />
+                                        <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20" />
+                                        <Label Grid.Row="2" Text="{Binding CardName}" TextColor="#7DE0FF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}" Margin="{OnIdiom Phone='50,0,0,0', Tablet='150,0,0,0', Desktop='50,0,0,0'}"
+                                                            HorizontalOptions="Fill" VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+
+                                <!-- Minus icon overlay -->
+                                <Image Source="minusicon.png" WidthRequest="36" HeightRequest="36" HorizontalOptions="End" VerticalOptions="Start" Margin="0,6,6,0" ZIndex="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- More features -->
+                <Label Text="More features" FontAttributes="Bold" TextColor="#B9C4CF" />
+
+                <CollectionView ItemsSource="{Binding AllAvailableCards}"
+                                ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=2, Tablet=3, Desktop=3}"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:LayoutModel">
+                            <Grid Padding="0" Margin="5">
+                                <!-- Card -->
+                                <Frame BackgroundColor="#28323C" BorderColor="#28323C" CornerRadius="20" Padding="10" HeightRequest="{OnIdiom Phone=135, Tablet=180, Desktop=26}" HorizontalOptions="FillAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.AddCommand, Source={RelativeSource AncestorType={x:Type local:ManageLayoutPage}}}"
+                                            CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.Row="0" Source="{Binding Image}" Aspect="AspectFit"  HeightRequest="{OnIdiom Phone=40, Tablet=60, Desktop=26}" WidthRequest="{OnIdiom Phone=40, Tablet=60, Desktop=26}" HorizontalOptions="Center" />
+                                        <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20" />
+                                        <Label Grid.Row="2" Text="{Binding CardName}" TextColor="#7DE0FF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}" Margin="{OnIdiom Phone='50,0,0,0', Tablet='150,0,0,0', Desktop='50,0,0,0'}"
+                                                            HorizontalOptions="Fill" VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+
+                                <!-- Plus icon overlay -->
+                                <Image Source="plusicon.png" WidthRequest="36" HeightRequest="36" HorizontalOptions="End" VerticalOptions="Start" Margin="0,6,6,0" ZIndex="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Save button -->
+                <Button Text="Save" Command="{Binding SaveCommand}" BackgroundColor="#28323C" TextColor="#7DE0FF" FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=16}"  HeightRequest="{OnIdiom Phone=46, Tablet=50, Desktop=52}"
+                    WidthRequest="{OnIdiom Phone=350, Tablet=600, Desktop=380}" CornerRadius="14" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Frame>
+</local:BaseContentPage>

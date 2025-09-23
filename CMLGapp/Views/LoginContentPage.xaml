@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             x:Class="CMLGapp.Views.LoginContentPage"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             ios:Page.UseSafeArea="True">
+
+   
+    <ScrollView>
+        <Grid Padding="{OnIdiom Phone='0,0', Tablet='0,0', Desktop='48,28'}">
+
+            <!-- Background video  -->
+            <toolkit:MediaElement x:Name="BgVideo" Source="embed://animation.mp4" ShouldAutoPlay="True" ShouldLoopPlayback="True" ShouldMute="True" ShouldShowPlaybackControls="False"
+                            Aspect="Fill" InputTransparent="True" ZIndex="-2" IsVisible="{OnIdiom Phone=true, Tablet=true, Desktop=true}" />
+
+            <!-- Centered card with max width -->
+            <VerticalStackLayout HorizontalOptions="{OnIdiom Phone=Start, Tablet=Start, Desktop=Start}"
+                                 Padding="{OnIdiom Phone='20,0', Tablet='40,0', Desktop='48,28'}" VerticalOptions="Center" Spacing="{OnIdiom Phone=28, Tablet=40}">
+                <Frame BackgroundColor="#0A141E" BorderColor="#0A141E" CornerRadius="30" HasShadow="True" Padding="{OnIdiom Phone=18, Tablet=24, Desktop=26}" 
+                       HorizontalOptions="Fill" MaximumWidthRequest="{OnIdiom Phone=420, Tablet=520, Desktop=560}">
+
+                  
+                    <VerticalStackLayout Spacing="{OnIdiom Phone=14, Tablet=18}">
+
+                        <!-- Header -->
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lblHeader" Text="coraApp" TextColor="#B9C3CD" FontAttributes="Bold" FontSize="{OnIdiom Phone=34, Tablet=50}" VerticalOptions="Center" />
+
+                            <Image Source="zollerimage.svg" HeightRequest="{OnIdiom Phone=48, Tablet=70}" WidthRequest="{OnIdiom Phone=72, Tablet=100}"
+                     Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" />
+                        </Grid>
+
+                        <!-- Email -->
+                        <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
+                            <Label Text=" Email" TextColor="#7D8791" FontAttributes="Bold"  FontSize="{OnIdiom Phone=13, Tablet=14}" />
+                            <Frame BackgroundColor="#46505A" CornerRadius="12" Padding="10,5"  HasShadow="False" BorderColor="Transparent" VerticalOptions="Start">
+                                <Entry x:Name="userName"  Placeholder="Email" Keyboard="Email"  BackgroundColor="Transparent" PlaceholderColor="#8C96A0" TextColor="#D2DCE6" 
+                                       HeightRequest="44" />
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference userName}, Path=IsFocused}" Value="True">
+                                        <Setter Property="BorderColor" Value="#F0E600"/>
+                                        <Setter Property="BackgroundColor" Value="#2F3942"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <!-- Password -->
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text=" PASSWORD" TextColor="#7D8791" FontAttributes="Bold" FontSize="{OnIdiom Phone=13, Tablet=14}" />
+                            <Frame BackgroundColor="#46505A" CornerRadius="12" Padding="10,5"  HasShadow="False" BorderColor="Transparent" VerticalOptions="Center">
+                                <Grid>
+                                    <Entry x:Name="password" Placeholder="Password" PlaceholderColor="#8C96A0" IsPassword="True" BackgroundColor="Transparent"
+                                           TextColor="#E1EBF5" HeightRequest="44"  TextChanged="OnPasswordChanged"/>
+                                    <ImageButton x:Name="togglePasswordVisibility" Source="eye.svg"  WidthRequest="20" HeightRequest="20" BackgroundColor="Transparent"
+                               HorizontalOptions="End" VerticalOptions="Center"  Clicked="OnTogglePasswordVisibilityClicked" IsVisible="False"  Opacity="0.6"/>
+                                </Grid>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference password}, Path=IsFocused}" Value="True">
+                                        <Setter Property="BorderColor" Value="#F0E600"/>
+                                        <Setter Property="BackgroundColor" Value="#2F3942"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <!-- Forgot Password -->
+                        <HorizontalStackLayout HorizontalOptions="End" Spacing="6">
+                            <Image Source="link.png" WidthRequest="{OnIdiom Phone=11, Tablet=12}" HeightRequest="{OnIdiom Phone=11, Tablet=12}" VerticalOptions="Center"/>
+                            <Label Text="Forgot Password?" FontSize="{OnIdiom Phone=13, Tablet=14}" TextColor="#D2DCE6" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnForgotPasswordTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <!-- Login -->
+                        <Button Text="Login"  Clicked="OnLoginClicked" BackgroundColor="#46505A" TextColor="#D2DCE6" FontAttributes="Bold" HeightRequest="50" CornerRadius="12" />
+
+                        <!-- Register -->
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="6">
+                            <Label Text="Don't have an Account?" TextColor="#7D8791" FontSize="{OnIdiom Phone=12, Tablet=12}" />
+                            <Image Source="link.png"  WidthRequest="{OnIdiom Phone=11, Tablet=12}" HeightRequest="{OnIdiom Phone=11, Tablet=12}" VerticalOptions="Center"/>
+                            <Label Text=" Register" FontSize="{OnIdiom Phone=13, Tablet=14}" TextColor="#D2DCE6" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRegisterTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Bottom-right arrow -->
+            <Image Source="arrow_circle.png"
+             HeightRequest="{OnIdiom Phone=40, Tablet=45}" WidthRequest="{OnIdiom Phone=40, Tablet=45}" HorizontalOptions="End"  VerticalOptions="End" Margin="{OnIdiom Phone=12, Tablet=20}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

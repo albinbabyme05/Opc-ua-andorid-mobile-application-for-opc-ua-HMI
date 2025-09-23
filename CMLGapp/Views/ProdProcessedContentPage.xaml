@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CMLGapp.Views"
+    x:Class="CMLGapp.Views.ProdProcessedContentPage"
+    Title="Current Status"
+    BackgroundColor="#28323C"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#28323C">
+
+    <!-- Body: everything wrapped in a panel-like Frame -->
+    <ScrollView>
+        <Frame
+            Margin="16"
+            Padding="14"
+            BackgroundColor="#555E68"
+            BorderColor="#555E68"
+            CornerRadius="20"
+            HasShadow="True">
+
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Product Processed -->
+                <Frame BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" CornerRadius="24" Padding="10" HasShadow="True" HeightRequest="250" Margin="0,0,0,4">
+                    
+                    <VerticalStackLayout Padding="5" Spacing="8">
+                        <Label Text="Product Processed" TextDecorations="Underline" FontSize="20" TextColor="Yellow" FontAttributes="Bold"/>
+
+                        <Frame BackgroundColor="#2C2C2C" Padding="5" CornerRadius="12" HasShadow="False">
+                            <Label x:Name="lblProdProcessedMsg" LineBreakMode="WordWrap" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                        </Frame>
+
+                        <Frame BackgroundColor="#2C2C2C" Padding="5" CornerRadius="12" HasShadow="False">
+                            <HorizontalStackLayout>
+                                <Label x:Name="lblProdProcessedCount" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        </Frame>
+
+                        <Frame BackgroundColor="#2C2C2C" Padding="5" CornerRadius="12" HasShadow="False">
+                            <HorizontalStackLayout>
+                                <Label x:Name="lblProdProcessedAccCount" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Product Measured -->
+                <Frame BackgroundColor="#2C2C2C" CornerRadius="24" Padding="10" HasShadow="True" HeightRequest="250" Margin="0,0,0,4">
+                    <VerticalStackLayout Padding="5" Spacing="8">
+                        <Label Text="Product Measured" TextDecorations="Underline" FontSize="20" TextColor="Yellow" FontAttributes="Bold"/>
+
+                        <Frame BackgroundColor="#2C2C2C" Padding="5" CornerRadius="12" HasShadow="False">
+                            <Label x:Name="lblProdConsumedMsg" LineBreakMode="WordWrap" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                        </Frame>
+
+                        <Frame BackgroundColor="#2C2C2C" Padding="5" CornerRadius="12" HasShadow="False">
+                            <HorizontalStackLayout>
+                                <Label x:Name="lblProdConsumedCount" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        </Frame>
+
+                        <Frame BackgroundColor="#2C2C2C" Padding="5" CornerRadius="12" HasShadow="False">
+                            <HorizontalStackLayout>
+                                <Label x:Name="lblProdConsumedAccCount" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Product Defect -->
+                <Frame BackgroundColor="#2C2C2C" BorderColor="#2C2C2C" CornerRadius="24" Padding="10" HasShadow="True" HeightRequest="250" Margin="0,0,0,4">
+                    <VerticalStackLayout Padding="5" Spacing="8">
+                        <Label Text="Product Defect" TextDecorations="Underline" FontSize="20" TextColor="Yellow" FontAttributes="Bold"/>
+
+                            <Label x:Name="lblProdDefectMsg" LineBreakMode="WordWrap" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                      
+                            <HorizontalStackLayout>
+                                <Label x:Name="lblProdDefectCount" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        
+                            <HorizontalStackLayout>
+                                <Label x:Name="lblProdDefectAccCount" FontSize="18" TextColor="Yellow" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+
+</local:BaseContentPage>

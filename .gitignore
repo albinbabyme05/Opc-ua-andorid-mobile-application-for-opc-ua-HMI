@@ -1,0 +1,181 @@
+# Build results
+bin/
+obj/
+opcConenector.UI/obj/Debug/
+UI/obj/
+# Ignore build outputs
+**/bin/
+**/obj/
+opcConenector.UI/obj/
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+Generated\
+
+# Rider IDE files
+.idea/
+
+# Visual Studio Code files
+.vscode/
+
+# Logs
+*.log
+
+# NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+
+# Packages folder
+packages/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Backup & report files
+*.bak
+*.rdlc
+*.rdlc.data
+*.rdlc.designer.cs
+
+# Publish folder
+publish/
+
+# Others
+*.dbmdl
+*.pdb
+*.cache
+*.pidb
+*.sdf
+*.db
+
+# Resharper files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# DotCover files
+*.dotCover
+
+# User-specific files
+*.rsuser
+*.suo
+*.userprefs
+
+# Mono auto generated files
+*.pidb
+*.userprefs
+
+# ASP.NET temporary files
+App_Data/
+
+# Test Results
+TestResults/
+*.trx
+
+# Others
+*.ide
+*.sln.cache
+*.userosscache
+*.vspscc
+
+# Ignore files created by Visual Studio when debugging
+*.vsp
+*.vsix
+*.vssscc
+
+
+opcUa_connecterConsoleApp/obj/
+/obj/Debug/net8.0-windows/opcConenector.UI.AssemblyInfo.cs
+# Ignore build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code and Visual Studio folders
+.vscode/
+.vs/
+.idea/
+
+# Auto-generated files
+Generated_Code/
+
+# Backup & temp files
+*~
+*.tmp
+*.bak
+*.old
+*.log
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Rider
+.idea/
+*.sln.iml
+
+# MAUI-specific (mobile build)
+**/bin/
+**/obj/
+**/platforms/*
+*.apk
+*.aab
+
+# macOS/iOS
+*.dSYM/
+*.xcuserstate
+*.xcworkspace/
+*.xcodeproj/
+*.plist
+*.maci/
+
+# Windows generated files
+*.pdb
+*.exe
+*.dll
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+# Other OS or Editor-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# JetBrains Rider caches
+.idea/
+.idea/*
+
+# Tizen build artifacts (used in MAUI for Tizen)
+.project/
+.cproject/
+.settings/
+
+# Maui Hot Reload
+**/HotReload/
+
+obj/
+*.cache
+*.AssemblyInfo.cs
+*.AssemblyReference.cache

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CMLGapp.Views"
+    x:Class="CMLGapp.Views.AnalyticsContentPage"
+    x:Name="AnalyticsPage"
+    x:DataType="local:AnalyticsContentPage"
+    Title="Set Services"
+    BackgroundColor="#28323C"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#28323C">
+
+    <Frame Padding="5" Margin="15,15,15,15" BackgroundColor="#555E68" BorderColor="#555E68" CornerRadius="15">
+        <ScrollView>
+            <Frame Padding="5"  BackgroundColor="#28323C" BorderColor="#28323C" CornerRadius="15" HeightRequest="200" VerticalOptions="Start">
+                <VerticalStackLayout Padding="16" Spacing="16">
+                
+                    <Label Text="Set Email Notification" FontSize="22" FontAttributes="Bold" TextColor="#FFFFFF"/>
+
+                <!-- Email  Set button-->
+                    <Frame BackgroundColor="#5A646E" BorderColor="#28323C" Padding="12" CornerRadius="14">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                            <Entry x:Name="EmailEntry" Placeholder="enter email to receive alarms" TextColor="#B9C4CF" PlaceholderColor="#B3BEC9" Keyboard="Email" Text="{Binding SavedEmail}" />
+                        <Button x:Name="SetButton" Grid.Column="1" Text="Set" Clicked="OnSetClicked"  BackgroundColor="#64C87D" TextColor="White" CornerRadius="12" />
+                    </Grid>
+                </Frame>
+
+                <!--  toggle -->
+                <Grid ColumnDefinitions="*,Auto" Padding="4,0">
+                    <Label Text="Enable email alerts" TextColor="#B3BEC9" FontSize="18" VerticalOptions="Center"/>
+                    <Switch x:Name="EnableSwitch" Grid.Column="1" Toggled="OnEnableToggled"/>
+                </Grid>
+
+                <!-- Status -->
+                <Label x:Name="StatusLabel" Text="" TextColor="#B3BEC9" FontSize="14"/>
+
+                <!-- Send test email -->
+                    <Button Text="Send test email" Clicked="OnSendTestClicked" BackgroundColor="#7DE0FF" TextColor="Black" CornerRadius="12" IsVisible="False"/>
+
+                </VerticalStackLayout>
+                
+                </Frame>
+            
+    </ScrollView>
+    </Frame>
+</local:BaseContentPage>

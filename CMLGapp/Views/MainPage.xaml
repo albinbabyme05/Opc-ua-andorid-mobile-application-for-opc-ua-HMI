@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CMLGapp.Helpers"
+             x:Class="CMLGapp.Views.MainPage"
+             Title="Zoller CoraMeasureLG"
+             BackgroundColor="#28323C"
+             Shell.NavBarIsVisible="False"
+             Shell.BackgroundColor="#303841">
+
+    <ContentPage.Resources>
+
+        <!--  gradient all panels -->
+        <LinearGradientBrush x:Key="PanelBg" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#303941" Offset="0.0"/>
+            <GradientStop Color="#2C353D" Offset="0.10"/>
+            <GradientStop Color="#28323C" Offset="1.0"/>
+        </LinearGradientBrush>
+
+        <!-- Top bar(hamburger  button + Machine mode + traffic light) -->
+        <Style x:Key="TopBarFrame" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="BackgroundColor" Value="#28323C"/>
+            <Setter Property="BorderColor" Value="#28323C"/>
+            <Setter Property="HeightRequest" Value="80"/>
+        </Style>
+
+        <!-- frame below pallet ui -->
+        <Style x:Key="InnerCard" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#2E363E"/> 
+            <Setter Property="BorderColor" Value="#2B3239"/> 
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="HasShadow" Value="False"/>
+        </Style>
+
+        <!-- tray-hole visuals -->
+        <Style x:Key="HoleRing" TargetType="Border">
+            <Setter Property="WidthRequest" Value="36"/>
+            <Setter Property="HeightRequest" Value="36"/>
+            <Setter Property="Stroke" Value="#0B3A46"/>
+            <Setter Property="StrokeThickness" Value="3.2"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="9999"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Radius="0" Opacity="0" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style x:Key="HoleDot" TargetType="Image">
+            <Setter Property="WidthRequest" Value="30"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <!-- tray panel: solid fill, no shadow or border halo -->
+        <Style x:Key="TrayPanel" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#1A2027"/>
+            <Setter Property="Stroke" Value="#1A2027"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="{OnIdiom Phone=10, Tablet=18, Desktop=26}"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Radius="0" Opacity="0"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+
+        <Grid x:Name="RootGrid" Padding="12" RowSpacing="8" ColumnSpacing="10">
+
+            <!-- Diplay orientation settings -->
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="OrientationStates">
+
+                    <!-- PORTRAIT -->
+                    <VisualState x:Name="Portrait">
+                        <VisualState.Setters>
+                            <!-- Hide Presetter in Portrait mode -->
+                            <Setter TargetName="MachineCanvas" Property="IsVisible" Value="False"/>
+                            <Setter TargetName="PalletBlock" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="PalletBlock" Property="Grid.ColumnSpan" Value="2"/>
+
+                      
+                            <Setter TargetName="RootGrid" Property="RowSpacing" Value="4"/>
+
+                            <Setter TargetName="PalletBlock" Property="Margin" Value="0,4,0,6"/>
+                            <Setter TargetName="CountersFrame" Property="Margin" Value="0,4,0,0"/>
+
+                            <!-- Merge counters to one column -->
+                            <Setter TargetName="CountersColRight" Property="Width" Value="0"/>
+                            <Setter TargetName="CountersPanel" Property="ColumnSpacing" Value="0"/>
+
+                            <!-- Counters frame components -->
+                            <Setter TargetName="TimeCard"      Property="HeightRequest" Value="-1"/>
+                            <Setter TargetName="DefectCard"    Property="HeightRequest" Value="-1"/>
+                            <Setter TargetName="CompletedCard" Property="HeightRequest" Value="-1"/>
+                            
+                            <!-- Elapsed time -->
+                            <Setter TargetName="TimeCard" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="TimeCard" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="TimeCard" Property="Grid.ColumnSpan" Value="2"/>
+
+                            <!-- Defect Tool Tolerance -->
+                            <Setter TargetName="DefectCard" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="DefectCard" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="DefectCard" Property="Grid.ColumnSpan" Value="2"/>
+
+                            <!-- % Completed -->
+                            <Setter TargetName="CompletedCard" Property="Grid.Row" Value="2"/>
+                            <Setter TargetName="CompletedCard" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="CompletedCard" Property="Grid.ColumnSpan" Value="2"/>
+                            <Setter TargetName="CompletedCard" Property="Grid.RowSpan" Value="1"/>
+                            <Setter TargetName="CompletedCard" Property="IsClippedToBounds" Value="True"/>
+                            <Setter TargetName="CompletedCard" Property="Margin" Value="0,0,0,0"/>
+                            <Setter TargetName="lblCompleted" Property="Margin" Value="0"/>
+
+                            <!-- ALARM -->
+                            <Setter TargetName="AlarmContainer" Property="Grid.Row" Value="3"/>
+                            <Setter TargetName="AlarmContainer" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="AlarmContainer" Property="Grid.ColumnSpan" Value="2"/>
+                            <Setter TargetName="AlarmContainer" Property="HeightRequest" Value="50"/>
+                            <Setter TargetName="AlarmContainer" Property="Margin" Value="0,0,0,0"/>
+                            
+                            <Setter TargetName="AlarmContainer" Property="ZIndex" Value="0"/>
+                            <Setter TargetName="CompletedCard" Property="ZIndex" Value="1"/>
+
+                            <!-- Pallet height & scaling -->
+                            <Setter TargetName="PalletBlock" Property="HeightRequest" Value="380"/>
+                            <Setter TargetName="TraysGrid" Property="ScaleX" Value="1.1"/>
+                            <Setter TargetName="TraysGrid" Property="ScaleY" Value="{OnIdiom Phone=1.1, Tablet=1.3, Desktop=1.3}"/>
+                            
+                            
+                            
+                            <!-- Counter frames heights -->
+                            <Setter TargetName="TimeCard" Property="HeightRequest" Value="{OnIdiom Phone=80, Tablet=120, Desktop=180}"/>
+                            <Setter TargetName="DefectCard" Property="HeightRequest" Value="{OnIdiom Phone=110, Tablet=200, Desktop=180}"/>
+                            <Setter TargetName="CompletedCard" Property="HeightRequest" Value="{OnIdiom Phone=190, Tablet=200, Desktop=180}"/>
+
+                            <!-- Tray fill & margins -->
+                            <Setter TargetName="TraysGrid" Property="HorizontalOptions" Value="Fill"/>
+                            <Setter TargetName="TraysGrid" Property="Margin" Value="0"/>
+                        </VisualState.Setters>
+                    </VisualState>
+
+
+                    <!-- LANDSCAPE -->
+                    <VisualState x:Name="Landscape">
+                        <VisualState.Setters>
+                            <Setter TargetName="MachineCanvas" Property="IsVisible" Value="True"/>
+                            <Setter TargetName="PalletBlock" Property="Grid.Column" Value="1"/>
+                            <Setter TargetName="PalletBlock" Property="Grid.ColumnSpan" Value="1"/>
+
+                            <!-- Restore default spacing -->
+                            <Setter TargetName="RootGrid" Property="RowSpacing" Value="8"/>
+                            <Setter TargetName="PalletBlock" Property="Margin" Value="0"/>
+                            <Setter TargetName="CountersFrame" Property="Margin" Value="0"/>
+                            <Setter TargetName="CountersPanel" Property="ColumnSpacing" Value="14"/>
+
+                            <!-- Completed cards -->
+                            <Setter TargetName="CompletedCard" Property="Grid.Row"  Value="0"/>
+                            <Setter TargetName="CompletedCard" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="CompletedCard" Property="Grid.ColumnSpan" Value="1"/>
+                            <Setter TargetName="CompletedCard" Property="Grid.RowSpan" Value="2"/>
+
+                            <!-- Alarm cards -->
+                            <Setter TargetName="AlarmTicker" Property="Grid.Row" Value="2"/>
+                            <Setter TargetName="AlarmTicker" Property="Grid.Column" Value="1"/>
+                            <Setter TargetName="AlarmTicker" Property="HeightRequest" Value="40"/>
+
+                            <!--elapsed time card -->
+                            <Setter TargetName="TimeCard" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="TimeCard" Property="Grid.Column" Value="1"/>
+                            <Setter TargetName="TimeCard" Property="Grid.ColumnSpan" Value="1"/>
+                            
+                            <!-- Defect cards -->
+                            <Setter TargetName="DefectCard" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="DefectCard" Property="Grid.Column" Value="1"/>
+                            <Setter TargetName="DefectCard" Property="Grid.ColumnSpan" Value="1"/>
+
+                            <!-- Restore pallet size -->
+                            <Setter TargetName="PalletBlock" Property="HeightRequest" Value="300"/>
+                            <Setter TargetName="TraysGrid" Property="Scale" Value="1"/>
+
+                            <!-- Height adjustement in Counter  frame cards -->
+                            <Setter TargetName="CompletedCard" Property="HeightRequest" Value="190"/>
+                            <Setter TargetName="TimeCard" Property="HeightRequest" Value="80"/>
+                            <Setter TargetName="DefectCard" Property="HeightRequest" Value="105"/>
+                        </VisualState.Setters>
+                    </VisualState>
+
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" x:Name="RowOffline"/>
+                <RowDefinition Height="Auto" x:Name="RowTopBar"/>
+                <RowDefinition Height="Auto" x:Name="RowProgress"/>
+                <RowDefinition Height="*" x:Name="RowPallet"/>
+                <RowDefinition Height="Auto" x:Name="RowCounters"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- OFFLINE BANNER -->
+            <Frame x:Name="OfflineBanner" Grid.Row="0" Grid.ColumnSpan="2" IsVisible="False" BackgroundColor="#1D252C" BorderColor="#1D252C"
+                   Padding="8" CornerRadius="10" HasShadow="False" Margin="0,0,0,6">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                    <Label Text="🔌  Offline — tap to reconnect" FontSize="12" FontAttributes="Bold" TextColor="#B9C4CF" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnReconnectTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label/>
+                    <Button x:Name="btnReconnect" Grid.Column="2" Text="Reconnect" Clicked="OnReconnectTapped" BackgroundColor="#3C4753" TextColor="#B9C4CF"
+                            FontSize="12" CornerRadius="8" WidthRequest="110" HeightRequest="36"/>
+                </Grid>
+            </Frame>
+
+            <!-- TOP BAR -->
+            <Frame Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource TopBarFrame}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Hamburger button -->
+                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="8" BackgroundColor="#28323C" BorderColor="#28323C" HasShadow="False">
+                        <Image x:Name="HamburgerMenu" Source="hamburger_menu.png"  WidthRequest="{OnIdiom Phone=25, Tablet=28, Desktop=26}" HeightRequest="{OnIdiom Phone=25, Tablet=28, Desktop=26}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnHamburgerTapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!-- Date / Mode -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center" HorizontalOptions="Start">
+                        <HorizontalStackLayout>
+                            <Label x:Name="lblPlcTime" TextColor="#B9C4CF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}"/>
+                            <Label x:Name="lblDateTime" TextColor="#B9C4CF" FontSize="{OnIdiom Phone=12, Tablet=16, Desktop=26}" Margin="6,0,0,0"/>
+                        </HorizontalStackLayout>
+                        <Label x:Name="lblMachineMode" Text="Loading..." FontAttributes="Bold" TextColor="#E6EDF3" FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=26}"/>
+                    </VerticalStackLayout>
+
+                    <!-- status -->
+                    <Grid Grid.Column="2" ColumnSpacing="10" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Column="0" Padding="10,6" CornerRadius="10" BackgroundColor="#28323C" BorderColor="#28323C" HasShadow="False">
+                            <Grid ColumnSpacing="8" VerticalOptions="Center" HorizontalOptions="End">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" x:Name="machineStatusColor" Source="machinestatus.svg"  WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" x:Name="lblMachineStatus" Text="Loading..." TextColor="#6CC68C" FontAttributes="Bold" FontSize="{OnIdiom Phone=14, Tablet=18, Desktop=26}"
+                                       LineBreakMode="NoWrap" MaxLines="1" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center" HorizontalOptions="End">
+                            <BoxView x:Name="bvStop" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4"  Opacity="1"/>
+                            <BoxView x:Name="bvStart" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4"   Opacity="1"/>
+                            <BoxView x:Name="bvRun" WidthRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" HeightRequest="{OnIdiom Phone=15, Tablet=20, Desktop=26}" CornerRadius="4"  Opacity="1"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Grid>
+            </Frame>
+
+            <!-- PROGRESS label -->
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="Auto,*" ColumnSpacing="16" Padding="6,2,6,2">
+                <Label Text="PROGRESS" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=13, Tablet=14, Desktop=26}" FontAttributes="Bold" VerticalOptions="Center"/>
+                <BoxView Grid.Column="1" HeightRequest="1" BackgroundColor="#4C5661" VerticalOptions="Center"/>
+            </Grid>
+
+            <!-- MACHINE CANVAS  -->
+            <Frame x:Name="MachineCanvas" Grid.Row="3" Grid.Column="0" CornerRadius="14" Padding="0" HasShadow="False" BorderColor="#28323C"
+                   BackgroundColor="#28323C" HeightRequest="300">
+                <Grid VerticalOptions="Center" HorizontalOptions="Fill">
+                    <Image Source="presetter_combined.png" HeightRequest="240" HorizontalOptions="Center" Aspect="AspectFit" Margin="0,0,60,0"/>
+                </Grid>
+            </Frame>
+
+           
+            <!--  PALLET BLOCK  -->
+            <Frame x:Name="PalletBlock" Grid.Row="3" Grid.Column="1" CornerRadius="14" Padding="0" HasShadow="False" BorderColor="#28323C" BackgroundColor="#28323C" HeightRequest="300">
+
+                <!-- Overlay container so we can place a bubble near tapped hole -->
+                <AbsoluteLayout x:Name="PalletOverlay" Padding="0">
+
+                    <!-- Original pallet content inside -->
+                    <Grid x:Name="PalletContent" RowSpacing="8" AbsoluteLayout.LayoutBounds="0,0,1,1"  AbsoluteLayout.LayoutFlags="All">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Header -->
+                        <Grid Grid.Row="0" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label x:Name="lblPalletName" Text="Adapter : Loading..." TextColor="#E6EDF3" FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=26}" Margin="20,0,0,0"/>
+                            <Label x:Name="lblPalletCapacity" Grid.Column="1" Text=" Smart Pallet Capacity : Loading..." TextColor="#E6EDF3" FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=26}" Margin="0,0,20,0"/>
+                        </Grid>
+
+                        <BoxView Grid.Row="1" BackgroundColor="#4C5661" HeightRequest="1"/>
+
+                        <!-- Pallet Trays -->
+                        <Grid x:Name="TraysGrid" Grid.Row="2" ColumnSpacing="6" Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left tray -->
+                            <Border Grid.Column="0" Style="{StaticResource TrayPanel}" HeightRequest="250" WidthRequest="{OnIdiom Phone=42, Tablet=82, Desktop=26}">
+                                <Grid RowSpacing="8" VerticalOptions="Center" HeightRequest="238" WidthRequest="68" BackgroundColor="#1A2027">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="0">
+                                        <Image x:Name="Img26" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="1">
+                                        <Image x:Name="Img27" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="2">
+                                        <Image x:Name="Img28" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="3">
+                                        <Image x:Name="Img29" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="4">
+                                        <Image x:Name="Img30" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="5">
+                                        <Image x:Name="Img31" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Center main tray -->
+                            <Border Grid.Column="1" Style="{StaticResource TrayPanel}" HeightRequest="250" WidthRequest="{OnIdiom Phone=210, Tablet=232, Desktop=26}">
+                                <Grid RowSpacing="8" ColumnSpacing="8" VerticalOptions="Center" HeightRequest="238" WidthRequest="212" BackgroundColor="#1A2027">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- cells 1..24 -->
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="0">
+                                        <Image x:Name="Img1"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="1">
+                                        <Image x:Name="Img7"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="2">
+                                        <Image x:Name="Img13" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="0" Grid.Column="3">
+                                        <Image x:Name="Img19" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="0">
+                                        <Image x:Name="Img2"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="1">
+                                        <Image x:Name="Img8"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="2">
+                                        <Image x:Name="Img14" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="1" Grid.Column="3">
+                                        <Image x:Name="Img20" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="0">
+                                        <Image x:Name="Img3"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="1">
+                                        <Image x:Name="Img9"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="2">
+                                        <Image x:Name="Img15" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="2" Grid.Column="3">
+                                        <Image x:Name="Img21" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="0">
+                                        <Image x:Name="Img4"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="1">
+                                        <Image x:Name="Img10" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="2">
+                                        <Image x:Name="Img16" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="3" Grid.Column="3">
+                                        <Image x:Name="Img22" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="0">
+                                        <Image x:Name="Img5"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="1">
+                                        <Image x:Name="Img11" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="2">
+                                        <Image x:Name="Img17" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="4" Grid.Column="3">
+                                        <Image x:Name="Img23" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+
+                                    <Border x:Name="R6C1" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="0">
+                                        <Image x:Name="Img6"  Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border x:Name="R6C2" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="1">
+                                        <Image x:Name="Img12" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border x:Name="R6C3" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="2">
+                                        <Image x:Name="Img18" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border x:Name="R6C4" Style="{StaticResource HoleRing}" Grid.Row="5" Grid.Column="3">
+                                        <Image x:Name="Img24" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Right tray -->
+                            <Border Grid.Column="2" Style="{StaticResource TrayPanel}" HeightRequest="250" WidthRequest="{OnIdiom Phone=42, Tablet=82, Desktop=26}">
+                                <Grid RowSpacing="8" VerticalOptions="Center" HeightRequest="238" WidthRequest="68" BackgroundColor="#1A2027">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="0">
+                                        <Image x:Name="Img32" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="1">
+                                        <Image x:Name="Img33" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="2">
+                                        <Image x:Name="Img34" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="3">
+                                        <Image x:Name="Img35" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="4">
+                                        <Image x:Name="Img36" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                    <Border Style="{StaticResource HoleRing}" Grid.Row="5">
+                                        <Image x:Name="Img37" Style="{StaticResource HoleDot}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Small info bubble that appears near tapped hole -->
+                    <Frame x:Name="HoleInfoBubble" IsVisible="False" Padding="8"  WidthRequest="{OnIdiom Phone=140, Tablet=160, Desktop=186}" CornerRadius="10" HasShadow="False"
+                           BackgroundColor="#1D252C" BorderColor="#1D252C" AbsoluteLayout.LayoutBounds="0,0,-1,-1" AbsoluteLayout.LayoutFlags="None">
+                        <Label x:Name="HoleInfoLabel"  TextColor="#E6EDF3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=26}" />
+                    </Frame>
+
+                </AbsoluteLayout>
+            </Frame>
+
+
+
+            <!-- BOTTOM COUNTERS PANEL -->
+            <Frame x:Name="CountersFrame" Grid.Row="4" Grid.ColumnSpan="2" CornerRadius="14" Padding="5" HasShadow="False" BackgroundColor="#555E68" BorderColor="#555E68">
+
+                <Grid x:Name="CountersPanel" ColumnSpacing="14" RowSpacing="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="CountersColLeft" Width="2*"/>
+                        <ColumnDefinition x:Name="CountersColRight" Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- COMPLETED %  -->
+                    <Frame x:Name="CompletedCard" Grid.Row="0" Grid.Column="0" Style="{StaticResource InnerCard}">
+                        <Grid RowSpacing="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" ColumnSpacing="8">
+                                <Label Text="CELL COMPLETION RATE" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=12}"/>
+                                <Label Grid.Column="1" Text="[%]" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=12}" HorizontalOptions="EndAndExpand"/>
+                            </Grid>
+
+                            <BoxView Grid.Row="1" BackgroundColor="#4C5661" HeightRequest="1"/>
+
+                            <!-- Pernctage lbl -->
+                            <Grid Grid.Row="2" HorizontalOptions="End" ColumnSpacing="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" x:Name="lblCompleted" Text="0" TextColor="#7DE0FF" FontSize="{OnIdiom Phone=90, Tablet=90, Desktop=90}" FontAttributes="Bold" FontFamily="zollerTextFont"
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="End" />
+                                <Label Grid.Column="1" Text="%" TextColor="#7DE0FF" FontSize="{OnIdiom Phone=25, Tablet=35, Desktop=35}" FontAttributes="Bold" FontFamily="zollerTextFont" 
+                                       VerticalTextAlignment="End" HorizontalTextAlignment="Start" Margin="0,0,0,18"/>
+                            </Grid>
+                            <Grid Grid.Row="3" Margin="0,5,0,0" VerticalOptions="End">
+                                <BoxView HeightRequest="6" BackgroundColor="#4A5561"  VerticalOptions="End"/>
+                                <ProgressBar x:Name="progressBar" HeightRequest="8" Progress="0" ProgressColor="#7DE0FF" BackgroundColor="Transparent" />
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <!-- ELAPSED TIME -->
+                    <Frame x:Name="TimeCard" Grid.Row="0" Grid.Column="1" Style="{StaticResource InnerCard}">
+                        <Grid RowSpacing="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" ColumnSpacing="8">
+                                <Label Text="EXECUTION TIME" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=12}"/>
+                                <Label Grid.Column="1" Text="[hh:mm:ss]" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=12}" HorizontalOptions="EndAndExpand"/>
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="#4C5661" HeightRequest="1"/>
+                            <Label Grid.Row="2" x:Name="lblExecutionTime" Text="Loading..." TextColor="#E6EDF3" FontSize="{OnIdiom Phone=20, Tablet=20, Desktop=12}" FontAttributes="Bold" FontFamily="zollerTextFont" HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- TOOLS OUT OF TOLERANCE -->
+                    <Frame x:Name="DefectCard" Grid.Row="1" Grid.Column="1" Style="{StaticResource InnerCard}">
+                        <Grid RowSpacing="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="TOOLS OUT OF TOLERANCE" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=12}"/>
+                                <Label Grid.Column="1" Text="[amount]" TextColor="#9BA7B3" FontSize="{OnIdiom Phone=10, Tablet=12, Desktop=12}" HorizontalOptions="End"/>
+                            </Grid>
+
+                            <BoxView Grid.Row="1" BackgroundColor="#4C5661" HeightRequest="1"/>
+
+                            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="End" Spacing="2">
+                                <Label x:Name="lblDefectCount" Text="0" FontSize="{OnIdiom Phone=30, Tablet=30, Desktop=12}" TextColor="#FF8C8C"  FontAttributes="Bold" FontFamily="zollerTextFont"/>
+                                <Label Text="/" TextColor="#7DE0FF" FontSize="30" FontAttributes="Bold" FontFamily="zollerTextFont"/>
+                                <Label x:Name="lblMeasuredCount" Text="0" FontSize="30" TextColor="#78C841" FontAttributes="Bold" FontFamily="zollerTextFont"/>
+                            </HorizontalStackLayout>
+
+                            <controls:TriProgressBar Grid.Row="3" x:Name="ToleranceBar" HeightRequest="6" TrackColor="#4C5661" BackgroundColor="Transparent"
+                                                     RedColor="#FF8C8C" GreenColor="#78C841" Margin="0,0,0,0"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- alarm container -->
+                    <Frame x:Name="AlarmContainer" Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="10" Padding="2" HasShadow="False" HeightRequest="50" 
+                           BackgroundColor="#555E68" BorderColor="#555E68" Margin="0,-5,0,0" >
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="4" VerticalOptions="Center">
+
+                            <!-- Image -->
+                            <Frame x:Name="AlarmIconFrame" Grid.Column="0" Padding="6" CornerRadius="10" HasShadow="False" 
+                                   BackgroundColor="#2E363E" BorderColor="#2E363E" Margin="0,0,8,0" HeightRequest="38" WidthRequest="48" VerticalOptions="Center">
+                                <Image Source="zoller_alarm.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+
+                            <!-- Alarm text -->
+                            <Frame x:Name="AlarmTicker" Grid.Column="1" Padding="8" CornerRadius="10" HasShadow="False" 
+                                   BackgroundColor="#2E363E" BorderColor="#2E363E" Margin="0,0,8,0" VerticalOptions="Center" IsClippedToBounds="True">
+                                <Label x:Name="lblAlarmMsg" Text="No alarm" TextColor="#9BA7B3" FontSize="14" LineBreakMode="TailTruncation" VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnAlarmTapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Frame>
+
+                            <!-- Button-->
+                            <Frame x:Name="AlarmButtonFrame" Grid.Column="2" Padding="0" CornerRadius="8" HasShadow="False" BackgroundColor="#2E363E" BorderColor="#2E363E"
+                                   HeightRequest="38" WidthRequest="44" VerticalOptions="Center">
+                                <Label Text="+" FontSize="24" TextColor="#9BA7B3" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAlarmButtonClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                </Grid>
+            </Frame>
+
+            <!--  -->
+            <Label x:Name="lblChartProcessedCount" IsVisible="False"/>
+            <Label x:Name="lblChartMeasuredCount"  IsVisible="False"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

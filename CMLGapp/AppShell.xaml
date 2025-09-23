@@ -1,0 +1,163 @@
+<Shell x:Class="CMLGapp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:CMLGapp.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="CMLGapp"
+    Shell.TabBarBackgroundColor="#2C2C2C"
+    Shell.TabBarUnselectedColor="Gray"
+    Shell.TabBarForegroundColor="Yellow"
+    Shell.TabBarTitleColor="Yellow"
+    Shell.FlyoutBackdrop="#CC000000"
+    Shell.FlyoutBackgroundColor="Transparent">
+
+    <Shell.FlyoutContent>
+        <Grid BackgroundColor="Transparent" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <VerticalStackLayout Grid.Column="0" Padding="20" Spacing="20" BackgroundColor="#28323C">
+
+                <!-- profile icon -->
+                <Frame CornerRadius="50" WidthRequest="80" HeightRequest="80" BackgroundColor="#5A646E" BorderColor="#5A646E" HorizontalOptions="Center">
+                    <Image Source="profile.png" Aspect="AspectFill" WidthRequest="70" HeightRequest="80" Margin="0,30,0,0"/>
+                </Frame>
+
+                <!-- Username -->
+                <Label x:Name="lblUserName" FontAttributes="Bold" FontSize="20" TextColor="#B3BEC9" HorizontalOptions="Center" Text="Username"  Margin="0,-20,0,0"/>
+
+                <!-- Overview -->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="zoller_overview.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Overviews" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOverviewClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Line -->
+                <BoxView HeightRequest="1" BackgroundColor="White" Opacity="0.5" Margin="0,-20,10,0" />
+
+                <!-- Analytics-->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="analytics.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Analytics" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProdStatusClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Notifications -->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="zoller_alarm.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Notitfications" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNotitficationClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Favourites-->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="favorite.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Favorites" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMenuClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- settings -->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="zoller_setting.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="User Settings" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Change Password  -->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="zoller_user_admin.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Change Password" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnChangePasswordClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Logout -->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="zoller_logout.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Logout" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLogoutClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                
+                <!-- verion -->
+                <Frame CornerRadius="10" Padding="12,10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="zoller_version.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="PMO.v10.1.0" TextColor="#B3BEC9" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    </Grid>
+                </Frame>
+                
+            </VerticalStackLayout>
+
+            <!-- flyout right side  -->
+            <ContentView Grid.Column="1" BackgroundColor="Transparent"/>
+        </Grid>
+    </Shell.FlyoutContent>
+
+    <!-- shell navgigations -->
+    <ShellContent ContentTemplate="{DataTemplate views:MainPage}" Route="MainPage" />
+    <ShellContent ContentTemplate="{DataTemplate views:LoginContentPage}" Route="login"/>
+    <ShellContent ContentTemplate="{DataTemplate views:RegisterationPage}" Route="register"/>
+    <ShellContent ContentTemplate="{DataTemplate views:AnalyticsContentPage}" Route="analytics" />
+
+</Shell>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMLGapp.Views.LoadingPage"
+             Shell.NavBarIsVisible="False" 
+             Title="LoadingPage"
+             BackgroundColor="Grey">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+
+        <!-- App Logo -->
+        <Image x:Name="rotatingImage" Source="zollericonrotate.png"  WidthRequest="120" HeightRequest="120" />
+
+        <!-- Loading Label -->
+        <Label x:Name="LoadingLabel" Text="Loading, please wait..." TextColor="White" FontSize="18" HorizontalOptions="Center" />
+
+        <!-- Progress Bar -->
+        <ProgressBar x:Name="ProgressBar" Progress="0" ProgressColor="LimeGreen" WidthRequest="250" HeightRequest="8" BackgroundColor="Gray"/>
+    </VerticalStackLayout>
+
+
+</ContentPage>   

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CMLGapp.Views"
+    x:Class="CMLGapp.Views.AlarmHistoryContentPage"
+    Title="Alarm History"
+    BackgroundColor="#28323C"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#28323C">
+        <!--Title bar top
+    <Shell.TitleView>
+        <Grid Padding="0" Margin="0" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="zollerlogo.png" WidthRequest="80" HeightRequest="100" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0"/>
+            <Label Text="⚠️  Alarm History" VerticalOptions="Center" FontAttributes="Bold" TextColor="White" FontSize="18" Padding="10" Grid.Column="1"/>
+        </Grid>
+    </Shell.TitleView>-->
+
+    <!--AlarmHistory ComponentPage-->
+    <ScrollView>
+        <Frame Padding="5" Margin="15,15,15,15" BackgroundColor="#555E68" BorderColor="#555E68" CornerRadius="15">
+            <VerticalStackLayout x:Name="AlarmHistoryContainer" Padding="5" Spacing="10">
+
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+    
+    
+        
+        
+    
+</local:BaseContentPage>

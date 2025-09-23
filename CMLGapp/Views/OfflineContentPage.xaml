@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMLGapp.Views.OfflineContentPage"
+             BackgroundColor="#5A646E">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25">
+
+            <!-- Logo Zoller -->
+            <Image Source="zollerlogo.png" Aspect="AspectFit" HeightRequest="200" Margin="50, 0, 50, 0" />
+
+            <!-- Login  -->
+            <Frame BackgroundColor="#1E1E1E" CornerRadius="10" Padding="20" HasShadow="True" BorderColor="#1E1E1E">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- Label -->
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Label Text="App is offline "  HorizontalOptions="Center" FontSize="20" TextColor="Yellow" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
+
+
+                    <!-- Login -->
+                    <Button Text="Reconnect" Clicked="OnTryToReconnect" FontAttributes="Bold" TextColor="White" BackgroundColor="#508390" HeightRequest="50" CornerRadius="10"
+                        Margin="0,20,0,0" />
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

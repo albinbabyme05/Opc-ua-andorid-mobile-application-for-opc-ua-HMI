@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CMLGapp.Views"
+    x:Class="CMLGapp.Views.StopReasonContentPage"
+    Title="Device Stop Reason"
+    BackgroundColor="#28323C"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#28323C">
+    
+    <ScrollView>
+        <Frame CornerRadius="15"  HasShadow="True"  Margin="15,15,15,15" Padding="5" BackgroundColor="#555E68" BorderColor="#555E68">
+
+            <VerticalStackLayout Spacing="5">
+
+                <!--Frame  -->
+                <Frame CornerRadius="15" Padding="10" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <VerticalStackLayout>
+
+                        <!-- Category -->
+                        <HorizontalStackLayout>
+                            <Label Text="Category : " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblStopCategory"  FontSize="18" TextColor="#7DE0FF" FontFamily="zollerTextFont"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Value  -->
+                        <HorizontalStackLayout>
+                            <Label Text="Value : "  FontSize="18" TextColor="#B9C4CF"/>
+                            <Label x:Name="lblStopValue" FontSize="18" TextColor="#7DE0FF" FontFamily="zollerTextFont"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Message  -->
+                        <VerticalStackLayout>
+                            <Label Text="Message :" FontSize="18" TextColor="#B9C4CF"/>
+                            <Label x:Name="lblMessage" MaxLines="3" LineBreakMode="WordWrap" FontSize="18" TextColor="#FA7D7D" HorizontalOptions="FillAndExpand"/>
+                        </VerticalStackLayout>
+
+
+                        <!-- Timw  -->
+                        <HorizontalStackLayout>
+                            <Label Text="DateTime : " FontSize="18" TextColor="#B9C4CF"/>
+                            <Label x:Name="lblStopDateTime" FontSize="18" TextColor="#FA7D7D"/>
+                        </HorizontalStackLayout>
+
+                        <!-- note -->
+                        <Label  Text="* Alarm associated to the primary cause of machine stoppage" TextColor="#B9C4CF" LineBreakMode="WordWrap" Margin="0,20,0,0"/>
+
+                    </VerticalStackLayout>
+                        
+                </Frame>
+
+            </VerticalStackLayout>
+        </Frame>
+
+
+
+    </ScrollView>
+</local:BaseContentPage>

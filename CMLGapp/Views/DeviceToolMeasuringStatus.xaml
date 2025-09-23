@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CMLGapp.Views"
+    x:Class="CMLGapp.Views.DeviceToolMeasuringStatus"
+    Title="Device Current Status"
+    BackgroundColor="#28323C"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#28323C">
+
+    <ScrollView>
+        <Frame Margin="15,15,15,15" Padding="5" BackgroundColor="#555E68" BorderColor="#555E68" CornerRadius="15" HasShadow="True">
+
+            <VerticalStackLayout Spacing="5">
+
+                <!-- Product Processed -->
+                <Frame  CornerRadius="15" Padding="10" HasShadow="True" Margin="0,0,0,4" BackgroundColor="#28323C" BorderColor="#28323C" >
+
+                    <VerticalStackLayout Padding="5" Spacing="8">
+                        <Label Text="Product Processed" TextDecorations="Underline" FontSize="20" TextColor="#B9C4CF" FontAttributes="Bold"/>
+                        <!-- count -->
+                        <HorizontalStackLayout>
+                            <Label Text="Count :  " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblProdProcessedCount" Text="Loading..." FontSize="18" TextColor="#7DE0FF" FontAttributes="Bold" FontFamily="zollerTextFont" />
+                        </HorizontalStackLayout>
+                        <!-- AccCount-->
+                        <HorizontalStackLayout>
+                            <Label Text="Accumilated Count :  " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblProdProcessedAccCount" Text="Loading..." FontSize="18" TextColor="#7DE0FF"   FontFamily="zollerTextFont"/>
+                        </HorizontalStackLayout>
+                        <!-- Message -->
+                        <Label x:Name="lblProdProcessedMsg" LineBreakMode="WordWrap" FontSize="12" TextColor="#B9C4CF" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Product Measured -->
+                <Frame CornerRadius="15" Padding="10" HasShadow="True" Margin="0,0,0,4" BackgroundColor="#28323C" BorderColor="#28323C" >
+                    <VerticalStackLayout Padding="5" Spacing="8">
+                        <Label Text="Product Measured" TextDecorations="Underline" FontSize="20" TextColor="#B9C4CF" FontAttributes="Bold"/>
+
+                            <HorizontalStackLayout>
+                            <Label Text="Count :  " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblProdConsumedCount" Text="Loading..." FontSize="18" TextColor="#7DE0FF"   FontFamily="zollerTextFont"/>
+                            </HorizontalStackLayout>
+                       
+                            <HorizontalStackLayout>
+                            <Label Text="Accumilated Count :  " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblProdConsumedAccCount" Text="Loading..." FontSize="18" TextColor="#7DE0FF"   FontFamily="zollerTextFont"/>
+                            </HorizontalStackLayout>
+                        <Label x:Name="lblProdConsumedMsg" LineBreakMode="WordWrap" FontSize="12" TextColor="#B9C4CF" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Product Defect -->
+                <Frame  CornerRadius="15" Padding="10" HasShadow="True"  Margin="0,0,0,4" BackgroundColor="#28323C" BorderColor="#28323C">
+                    <VerticalStackLayout Padding="5" Spacing="8">
+                        <Label Text="Product Defect" TextDecorations="Underline" FontSize="20" TextColor="#B9C4CF" FontAttributes="Bold"/>
+
+                        <HorizontalStackLayout>
+                            <Label Text="Count :  " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblProdDefectCount" Text="Loading..." FontSize="18" TextColor="#7DE0FF"   FontFamily="zollerTextFont"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout>
+                            <Label Text="Accumilated Count :  " FontSize="18" TextColor="#B9C4CF" />
+                            <Label x:Name="lblProdDefectAccCount" Text="Loading..." FontSize="18" TextColor="#7DE0FF"   FontFamily="zollerTextFont"/>
+                        </HorizontalStackLayout>
+
+                        <Label x:Name="lblProdDefectMsg" LineBreakMode="WordWrap" FontSize="12" TextColor="#B9C4CF" FontAttributes="Bold" />
+
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+
+</local:BaseContentPage>

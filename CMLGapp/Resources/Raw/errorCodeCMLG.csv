@@ -1,0 +1,67 @@
+﻿001;Control System;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+001;Control System;1;1;Initial reset is needed. Reset the machine.
+002;UPS;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+002;UPS;16;2;Check the mini PC UPS inside the electrical panel.
+101;Pilz Emergency Controller;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+101;Pilz Emergency Controller;1;0;Check connection from the Pilz controller to the mini PC.
+101;Pilz Emergency Controller;2;0;"Release the measuring device side, external Emergency PB and reset the machine."
+101;Pilz Emergency Controller;3;0;"Release the measuring device side, internal Emergency PB and reset the machine."
+101;Pilz Emergency Controller;4;0;"Release the pallet side, internal Emergency PB and reset the machine."
+101;Pilz Emergency Controller;5;0;Check air pressure to the machine.
+102;Safty Doors;1;1;Close the measuring device side door. (Applicable only in Auto mode.)
+102;Safty Doors;2;1;Close the measuring device side door. (Applicable only in Auto mode.)
+102;Safty Doors;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+102;Safty Doors;1;0;Close the measuring device side door. (Applicable only in Auto mode.)
+102;Safty Doors;2;0;Close the pallet side door.  (Applicable only in Auto mode.)
+102;Safty Doors;3;0;Check the lock manual setting of the  measuring device side door.  (Applicable only in Auto mode.)
+102;Safty Doors;4;0;Check the lock manual setting of  the pallet side door.  (Applicable only in Auto mode.)
+201;Pallet Valve;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+201;Pallet Valve;1;1;"Reset the machine, if error repeated then contact Zoller support."
+201;Pallet Valve;5;1;Check valve moving speed and sensor positions. Valve should be able to change from one position to the other in less that 3 seconds.
+201;Pallet Valve;6;1;"Check valve sensor positions, electrical connection, air leakage and air connections. When valve is in one position it should not loose that position without any new command!"
+201;Pallet Valve;7;1;Check valve sensor positions and electrical connection. In any condition maximum only one side sensor should be activated!
+202;Side Pallets Identification Sensors;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+202;Side Pallets Identification Sensors;1;1;Different side pallets are in buffer positions. Both side pallet code should be equal.
+202;Side Pallets Identification Sensors;2;1;There is no pallet in intermediate buffer position. Put appropriate pallet in the buffer.
+202;Side Pallets Identification Sensors;3;1;There is no pallet in dump buffer position. Put appropriate pallet in the buffer.
+203;Detection Sensors;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+203;Detection Sensors;1;1;Main pallet is not corrctly placed. Push the main pallet to the end and try again.(Applicable only in Auto mode.)
+203;Detection Sensors;2;1;There is no pallet in main pallet position. Tools pallet must be inserted before starting.(Applicable only in Auto mode.)
+203;Detection Sensors;3;1;Intermediate buffer is not empty for fresh start. Remove any tools from it and try again.(Applicable only in Auto mode.)
+203;Detection Sensors;4;1;Dump buffer is not empty for fresh start. Remove any tools from it and try again.(Applicable only in Auto mode.)
+203;Detection Sensors;5;1;"Dump buffer is full, machine stops. Take out the tools and do fresh start.  (Applicable only in Auto mode.)"
+203;Detection Sensors;16;2;"Dump buffer has  only 1 empty slot, possible stop is imminent. (Applicable only in Auto mode.)"
+204;RFID Sensor;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+204;RFID Sensor;1;1;"Check serial port of PLC to RFID sensor cable and connection, driver installation and sensor power."
+204;RFID Sensor;2;1;Different type of side pallets compare to main pallet code are used. Both side pallet code and main pallet code should be equal.
+204;RFID Sensor;3;1;RFID tag has an invalid format or data in the header. Only valid RFID tag can be used with the machine.
+204;RFID Sensor;4;1;RFID tag is not present on the pallet.
+301;Gripper Tool Detector Sensor;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+301;Gripper Tool Detector Sensor;1;1;There is a tool in the gripper. Remove it and try again.(Applicable only in Auto mode.)
+301;Gripper Tool Detector Sensor;16;2;"Check the sensor, cabling and try again. If problem still exist contat Zoller support.(Applicable only in Auto mode.)"
+302;Gripper Valve;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+302;Gripper Valve;1;1;"Reset the machine, if error repeated then contact Zoller support."
+302;Gripper Valve;5;1;Check valve moving speed and sensor positions. Valve should be able to change from one position to the other in less that 3 seconds.
+302;Gripper Valve;6;1;"Check valve sensor positions, electrical connection, air leakage and air connections. When valve is in one position it should not loose that position without any new command!"
+302;Gripper Valve;7;1;Check valve sensor positions and electrical connection. In any condition maximum only one side sensor should be activated!
+302;Gripper Valve;8;1;Gripper should be open before starting up the process. Open it first in manual mode and then try it again.(Applicable only in Auto mode.)
+302;Gripper Valve;9;1;Gripper closed to grip a detected tool but it can not grip the tool. Gripper close signal received (instead of grip signal) while trying to grip a tool.Check the tool detector sensor or adjust gripper sensor.(Applicable only in Auto mode.)
+303;Axes;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+303;Axes;1;1;"Stepper drive has an error. Reset the machine, if the error recurs, contact Zoller Support."
+303;Axes;2;1;Check communication with the stepper controller and try again.
+303;Axes;3;1;"After each power on machine should automatically do homing procedure and then manual mode is possible. Put the machine in the auto mode and reset the machine one time, then manual mode should work normally.(Applicable only in Manual mode.)"
+303;Axes;16;2;X axis draw high currnet. Mechanical adjustment is required.
+303;Axes;17;2;Y axis draw high currnet. Mechanical adjustment is required.
+303;Axes;18;2;Z axis draw high currnet. Mechanical adjustment is required.
+401;Measuring Device;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+401;Measuring Device;1;1;Set measuring device in auto mode and try again.
+401;Measuring Device;2;1;Check connection from Pilot PC to PLC.
+401;Measuring Device;3;1;Homing procedure can not be fulfilled from Pilot. No response.
+401;Measuring Device;4;1;There is no tool in toolholder to clamp. Check the tool holder.
+401;Measuring Device;5;1;Clamping procedure can not be fulfilled from Pilot. No response.
+401;Measuring Device;6;1;Unclamping procedure can not be fulfilled from Pilot. No response.
+402;Measuring Device Tool Detector Sensor;0;1;"Reset the machine, if the error recurs, contact Zoller Support."
+402;Measuring Device Tool Detector Sensor;1;1;Dump buffer is not empty for fresh start. Remove any tools from it and try again.(Applicable only in Auto mode.)
+502;Manual Control Switches;16;2;"Check axes selector switch, connections and cable.(Applicable only in Manual mode.)"
+502;Manual Control Switches;17;2;"Check control selector switch, connections and cable.(Applicable only in Manual mode.)"
+0;Unknown;0;0;"Reset the machine, if the error recurs, contact Zoller Support."
